@@ -1,6 +1,7 @@
 package pl.aw84.imagelib.frontend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class IndexController {
     @Autowired
     WebClient.Builder webClientBuilder;
 
+    @Value("${imageSourceHost}")
+    String imageSourceHost;
+
     @GetMapping(value = "/index")
     public String getHomepage(Model model) {
         model.addAttribute("attr1", new String("value of attr1"));
@@ -28,6 +32,7 @@ public class IndexController {
                 .bodyToMono(Image[].class)
                 .block();
 
+        model.addAttribute("imageHost", imageSourceHost);
         model.addAttribute("images", images);
         return "index-b";
     }

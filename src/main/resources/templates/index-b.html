@@ -10,7 +10,10 @@
     <h1>ImageLib front page</h1>
     <p th:text="'attr1, ' + ${attr1} + '!'"></p>
     <div th:each="image : ${images}">
-        <pre><p th:text="${image.imageId}+' '+${image.name}"></p></pre>
+        <div th:each="storage: ${image.storage}">
+            <pre><p th:text="${image.imageId}+' '+${storage.relativePath}"></p></pre>
+            <img height="200px" width="auto" th:src="${imageHost}+'/'+${storage.relativePath}" />
+        </div>
     </div>
 </body>
 
