@@ -2,19 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>ImgLib</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/styles/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/styles/main.css}">
+    <script type="text/javascript" th:src="@{/scripts/jquery-3.6.0.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/jquery-ui.min.js}"></script>
+    <script type="text/javascript" th:src="@{/scripts/main.js}"></script>
 </head>
 
 <body>
     <h1>ImageLib front page</h1>
-    <p th:text="'attr1, ' + ${attr1} + '!'"></p>
-    <div th:each="image : ${images}">
-        <div th:each="storage: ${image.storage}">
-            <pre><p th:text="${image.imageId}+' '+${storage.relativePath}"></p></pre>
-            <img height="200px" width="auto" th:src="${imageHost}+'/'+${storage.relativePath}" />
+    <div>View Upload Albums</div>
+    <div>
+        <p th:text="'Page: '+ ${currentPage} + ' of ' + ${totalPages}"></p>
+        <a th:if="${currentPage-1>=0}" th:href="'/index?p='+ ${currentPage-1}">Prev</a>
+        <a th:if="${currentPage<totalPages}" th:href="'/index?p='+ ${currentPage+1}">Next</a>
+    </div>
+    <div id="imageGrid" class="imageGrid">
+        <div th:each="image : ${images}">
+            <div th:each="storage: ${image.storage}">
+                <div class="imageGridItem">
+                    <pre><p th:text="${image.name}"></p></pre>
+                    <img id="image" onclick="imageBigView(this)" th:src="${imageHost}+'/'+${storage.relativePath}" />
+                </div>
+            </div>
         </div>
     </div>
+    <div id="imageOverlay"></div>
 </body>
 
 </html>

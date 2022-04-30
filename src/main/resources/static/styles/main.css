@@ -1,0 +1,19 @@
+.imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-column-gap: 10px;
+    background-color: black;
+}
+
+.imageGridItem {
+    background-color: black;
+    color: white;
+}
+
+#image {
+    max-width: 100%;
+}
+
+.no-close .ui-dialog-titlebar-close {
+    display: none;
+}
