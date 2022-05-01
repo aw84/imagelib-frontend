@@ -14,17 +14,18 @@
 <body>
     <h1>ImageLib front page</h1>
     <div>View Upload Albums</div>
+    <p th:insert="fragments/header.html :: header"> </p>
     <div>
         <p th:text="'Page: '+ ${currentPage} + ' of ' + ${totalPages}"></p>
         <a th:if="${currentPage-1>=0}" th:href="'/index?p='+ ${currentPage-1}">Prev</a>
         <a th:if="${currentPage<totalPages}" th:href="'/index?p='+ ${currentPage+1}">Next</a>
     </div>
-    <div id="imageGrid" class="imageGrid">
+    <div class="imageGrid">
         <div th:each="image : ${images}">
             <div th:each="storage: ${image.storage}">
                 <div class="imageGridItem">
                     <pre><p th:text="${image.name}"></p></pre>
-                    <img id="image" onclick="imageBigView(this)" th:src="${imageHost}+'/'+${storage.relativePath}" />
+                    <img class="imageOnGrid" onclick="imageBigView(this)" th:id="${image.imageId}" th:src="${imageHost}+'/'+${storage.relativePath}" />
                 </div>
             </div>
         </div>
