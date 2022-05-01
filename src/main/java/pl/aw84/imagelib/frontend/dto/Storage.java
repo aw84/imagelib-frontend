@@ -12,6 +12,7 @@ public class Storage {
     private Image image;
 
     private String protocol;
+    private String quality;
     private String host;
 
     private String relativePath;
@@ -21,10 +22,20 @@ public class Storage {
     public Storage() {
     }
 
-    public Storage(UUID storageId, Image image, String protocol, String host, String relativePath, String hash) {
+    public String getQuality() {
+        return quality;
+    }
+
+    public void setQuality(String quality) {
+        this.quality = quality;
+    }
+
+    public Storage(UUID storageId, Image image, String protocol, String quality, String host, String relativePath,
+            String hash) {
         this.storageId = storageId;
         this.image = image;
         this.protocol = protocol;
+        this.quality = quality;
         this.host = host;
         this.relativePath = relativePath;
         this.hash = hash;
