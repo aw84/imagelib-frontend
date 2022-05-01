@@ -12,5 +12,6 @@ function imageBigView(img) {
         dialogClass: "no-close",
         modal: true,
         minWidth: 700,
+        iframe: true,
     });
 }
