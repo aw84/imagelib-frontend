@@ -3,7 +3,6 @@ package pl.aw84.imagelib.frontend.controller;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -21,9 +20,6 @@ public class IndexController {
     @Autowired
     WebClient.Builder webClientBuilder;
 
-    @Value("${imageSourceHost}")
-    String imageSourceHost;
-
     @GetMapping(value = "/index")
     public String getHomepage(Model model, @RequestParam(defaultValue = "0") Integer p) {
 
@@ -34,7 +30,7 @@ public class IndexController {
                 .bodyToMono(ImagePaginatedResponse.class)
                 .block();
 
-        model.addAttribute("imageHost", imageSourceHost);
+        model.addAttribute("imageHost", "/i/");
         model.addAttribute("images", pir.getContent());
         model.addAttribute("totalPages", pir.getTotalPages());
         model.addAttribute("currentPage", pir.getNumber());
@@ -50,7 +46,7 @@ public class IndexController {
                 .bodyToMono(String[].class)
                 .block();
         if (storageRelativePaths.length > 0) {
-            model.addAttribute("imageSrc", imageSourceHost + "/" + storageRelativePaths[0]);
+            model.addAttribute("imageSrc", "/i/" + storageRelativePaths[0]);
         }
         model.addAttribute("id", p);
 

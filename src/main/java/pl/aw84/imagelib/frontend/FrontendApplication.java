@@ -18,5 +18,4 @@ public class FrontendApplication {
 	WebClient.Builder webClientBuilder() {
 		return WebClient.builder();
 	}
-
 }

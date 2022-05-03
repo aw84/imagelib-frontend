@@ -3,12 +3,15 @@
 
 <head>
     <title>ImgLib</title>
+    <link
+        href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAfP98ALz/vAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARARAAAAAAASISIQAAAAABIiIhAAAAARASIhARAAASIQEhASIQABIiEBASIhAAASIhASIhAAASIhAQEiIQABIhASEBIhAAARASIhARAAAAASIiIQAAAAABIhIhAAAAAAARARAAAAAAAAAAAAAAD//wAA+T8AAPAfAADgDwAAwAcAAIADAAAAAQAAAAEAAIADAAAAAQAAAAEAAIADAADABwAA4A8AAPAfAAD5PwAA"
+        rel="icon" type="image/x-icon" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" th:href="@{/styles/jquery-ui.min.css}">
-    <link rel="stylesheet" th:href="@{/styles/main.css}">
-    <script type="text/javascript" th:src="@{/scripts/jquery-3.6.0.min.js}"></script>
-    <script type="text/javascript" th:src="@{/scripts/jquery-ui.min.js}"></script>
-    <script type="text/javascript" th:src="@{/scripts/main.js}"></script>
+    <link rel="stylesheet" th:href="@{/s/styles/jquery-ui.min.css}">
+    <link rel="stylesheet" th:href="@{/s/styles/main.css}">
+    <script type="text/javascript" th:src="@{/s/scripts/jquery-3.6.0.min.js}" defer></script>
+    <script type="text/javascript" th:src="@{/s/scripts/jquery-ui.min.js}" defer></script>
+    <script type="text/javascript" th:src="@{/s/scripts/main.js}" defer></script>
 </head>
 
 <body>
@@ -25,7 +28,8 @@
             <div th:each="storage: ${image.storage}">
                 <div th:if="${storage.quality=='tiny'}" class="imageGridItem">
                     <pre><p th:text="${image.name}"></p></pre>
-                    <img class="imageOnGrid" onclick="imageBigView(this)" th:id="${image.imageId}" th:src="${imageHost}+'/'+${storage.relativePath}" />
+                    <img class="imageOnGrid" onclick="imageBigView(this)" th:id="${image.imageId}"
+                        th:src="${imageHost}+${storage.relativePath}" />
                 </div>
             </div>
         </div>
