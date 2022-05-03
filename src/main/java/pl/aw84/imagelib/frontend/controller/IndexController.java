@@ -44,14 +44,16 @@ public class IndexController {
     @GetMapping(value = "/fragments/imageOverlay")
     public String getImageOverlayFragment(Model model, @RequestParam(defaultValue = "0") UUID p) {
 
-        String storageRelativePath = webClientBuilder.build().get()
+        String[] storageRelativePaths = webClientBuilder.build().get()
                 .uri("http://api/storage/{p}", p)
-                .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(String[].class)
                 .block();
+        if (storageRelativePaths.length > 0) {
+            model.addAttribute("imageSrc", imageSourceHost + "/" + storageRelativePaths[0]);
+        }
         model.addAttribute("id", p);
-        model.addAttribute("imageSrc", imageSourceHost + "/" + storageRelativePath);
+
         return "fragments/imageOverlay.html :: imageOverlay";
     }
 

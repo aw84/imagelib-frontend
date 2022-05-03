@@ -6,7 +6,7 @@ function imageBigView(img) {
             $('#imageOverlay').html(result);
         }
     });
-    $('#imageOverlay').click(function () { $(this).dialog("close"); });
+    $('#imageOverlay').click(function () { $('#imageOverlay').html("<div></div>"); $(this).dialog("close"); });
     $('#imageOverlay').dialog({
         position: { my: "top", at: "top", of: window },
         dialogClass: "no-close",
