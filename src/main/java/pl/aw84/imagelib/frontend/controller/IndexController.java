@@ -37,6 +37,7 @@ public class IndexController {
         return "index-b";
     }
 
+    //todo: default value "0" is wrong for UUID type
     @GetMapping(value = "/fragments/imageOverlay")
     public String getImageOverlayFragment(Model model, @RequestParam(defaultValue = "0") UUID p) {
 
@@ -51,6 +52,12 @@ public class IndexController {
         model.addAttribute("id", p);
 
         return "fragments/imageOverlay.html :: imageOverlay";
+    }
+
+    @GetMapping(value = "/fragments/uploadOverlay")
+    public String getImageUploadFragment(Model model) {
+
+        return "fragments/uploadOverlay.html :: uploadOverlay";
     }
 
     @GetMapping(value = "/fragments/header")

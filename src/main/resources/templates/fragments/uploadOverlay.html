@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="headerfiles">
+    <meta charset="UTF-8" />
+    <!-- <link th:href="@{/css/styles.css}" rel="stylesheet"> -->
+</head>
+
+<body>
+    <div th:fragment="uploadOverlay" id="uploadOverlay">
+        <button id="uploadOkButton" onclick="uploadOkButton()">Upload</button>
+        <input type="file" id="uploadImageFile" name="filename">
+        <p>Upload</p>
+    </div>
+</body>
+
+</html>
