@@ -12,22 +12,22 @@ public class Image {
 
     private String name;
 
-    private Set<Storage> storage;
+    private Set<Storage> storages;
 
     public Image() {
     }
 
-    public Image(UUID imageId, String name, Set<Storage> storage) {
+    public Image(UUID imageId, String name, Set<Storage> storages) {
         this.imageId = imageId;
         this.name = name;
-        this.storage = storage;
+        this.storages = storages;
     }
 
     @Override
     public String toString() {
         return "Image [imageId=" + imageId +
                 ", name=" + name +
-                ", storages=" + storage +
+                ", storages=" + storages +
                 "]";
     }
 
@@ -47,11 +47,11 @@ public class Image {
         this.name = name;
     }
 
-    public Set<Storage> getStorage() {
-        return storage;
+    public Set<Storage> getStorages() {
+        return storages;
     }
 
-    public void setStorage(Set<Storage> storage) {
-        this.storage = storage;
+    public void setStorages(Set<Storage> storages) {
+        this.storages = storages;
     }
 }

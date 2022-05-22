@@ -23,7 +23,7 @@
     </div>
     <div class="imageGrid">
         <div th:each="image : ${images}">
-            <div th:each="storage: ${image.storage}">
+            <div th:each="storage: ${image.storages}">
                 <div th:if="${storage.quality=='tiny'}" class="imageGridItem">
                     <pre><p th:text="${image.name}"></p></pre>
                     <img class="imageOnGrid" onclick="imageBigView(this)" th:id="${image.imageId}"
