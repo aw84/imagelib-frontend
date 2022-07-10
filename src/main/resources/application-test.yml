@@ -1,0 +1,26 @@
+imageSourceHost: /tmp
+server:
+  port: 0
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - "*"
+spring:
+  application:
+    name: frontend
+  cloud:
+    discovery:
+      enabled: false
+    config:
+      discovery:
+        enabled: false
+      enabled: false
+  zipkin:
+    enabled: false
+  # config:
+  #   import: optional:configserver:${CONFIG_SERVER}
+  devtools:
+    livereload:
+      port: 35734
