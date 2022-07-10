@@ -39,8 +39,28 @@ function uploadPopup() {
     });
 }
 function uploadOkButton() {
-    // console.log(this);
-    fileName = $('#uploadImageFile')[0].files;
-    console.log(fileName);
+
+    var formData = new FormData();
+    jQuery.each($('#uploadImageFile')[0].files, function (i, file) {
+        formData.append('files', file);
+    });
+    console.log($('#uploadImageFile')[0].files);
+    file = $('#uploadImageFile')[0].files[0];
+    // console.log("File: " + file);
+    // var formData = new FormData();
+    // formData.append("files", file);
+    $.ajax({
+        url: "/upload?fname=" + file.name,
+        type: "POST",
+        method: "POST",
+        cache: false,
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            console.log("Upload result: " + result);
+        }
+    });
+
     $('#uploadOverlay').dialog("close");
 }

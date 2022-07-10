@@ -1,5 +1,6 @@
 package pl.aw84.imagelib.frontend.controller;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,16 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 
 import pl.aw84.imagelib.frontend.dto.ImagePaginatedResponse;
 
@@ -37,7 +46,37 @@ public class IndexController {
         return "index-b";
     }
 
-    //todo: default value "0" is wrong for UUID type
+    @PostMapping(value = "/upload")
+    public String uploadImage(@RequestParam(value = "files") MultipartFile[] files) {
+        try {
+            for (MultipartFile file : files) {
+                Metadata metadata = ImageMetadataReader.readMetadata(file.getInputStream());
+                for (Directory directory : metadata.getDirectories()) {
+                    for (Tag tag : directory.getTags()) {
+                        System.out.format("[%s] - %s = %s\n",
+                                directory.getName(), tag.getTagName(), tag.getDescription());
+                    }
+                    if (directory.hasErrors()) {
+                        for (String error : directory.getErrors()) {
+                            System.err.format("ERROR: %s", error);
+                        }
+                    }
+                }
+
+                System.err.println(file.getOriginalFilename() + " " + file.getBytes().length);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (ImageProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return "empty";
+    }
+
+    // todo: default value "0" is wrong for UUID type
     @GetMapping(value = "/fragments/imageOverlay")
     public String getImageOverlayFragment(Model model, @RequestParam(defaultValue = "0") UUID p) {
 
